@@ -822,7 +822,7 @@
           url: `${document.location.pathname}/SaveOrder`,
           success: function (data) {
             printReceipt(data.cart, data.sales);
-            location.reload(true);
+            // location.reload(true);
           },
         });
       });
