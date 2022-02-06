@@ -1,0 +1,31 @@
+.grid-outer {
+  text-decoration: none;
+}
+.grid-wrap {
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+}
+.grid-wrap :hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.grid-head {
+  font-size: 70px;
+}
+.grid-footer h5 {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  color: #fff;
+  font-size: 30px;
+}
+
+.dashboard-grid :hover {
+  text-decoration: none;
+}
+.dashboard-grid .display-5 {
+  font-size: 80px;
+  color: #fff;
+}
+.label-footer {
+  color: #fff !important;
+}

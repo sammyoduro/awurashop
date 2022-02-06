@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('./partials/menu')%>
+
+      <div class="main">
+        <%- include('./partials/header')%>
+
+        <main class="content">
+          <div class="container-fluid p-0">
+            <div class="row mb-2 mb-xl-3">
+              <div class="col-auto d-none d-sm-block">
+                <h3><strong>Dashboard</strong></h3>
+              </div>
+
+              <div class="col-auto ml-auto text-right mt-n1">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
+                    <li class="breadcrumb-item"><a href="#">AdminKit</a></li>
+                    <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Analytics
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <a href="/Sales" style="text-decoration: none">
+                  <div
+                    class="grid-wrap"
+                    style="background-color: rgba(245, 197, 63, 0.979)"
+                  >
+                    <div class="grid-head">
+                      <i class="fas fa-fw fa-shopping-cart"></i>
+                    </div>
+                    <div class="grid-footer">
+                      <h5>Sales</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-lg-4">
+                <a href="/Products" style="text-decoration: none">
+                  <div
+                    class="grid-wrap"
+                    style="background-color: rgba(15, 161, 39, 0.979)"
+                  >
+                    <div class="grid-head">
+                      <i class="fas fa-fw fa-tag"></i>
+                    </div>
+                    <div class="grid-footer">
+                      <h5>Product</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-lg-4">
+                <a href="/History" style="text-decoration: none">
+                  <div
+                    class="grid-wrap"
+                    style="background-color: rgba(15, 151, 161, 0.979)"
+                  >
+                    <div class="grid-head">
+                      <i class="fas fa-fw fa-history"></i>
+                    </div>
+                    <div class="grid-footer">
+                      <h5>Sales History</h5>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-lg-4">
+                <div class="grid-wrap">
+                  <div class="grid-head">
+                    <i class="fas fa-fw fa-plus"></i>
+                  </div>
+                  <div class="grid-footer">
+                    <h5>Sales</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="grid-wrap">
+                  <div class="grid-head">
+                    <i class="fas fa-fw fa-plus"></i>
+                  </div>
+                  <div class="grid-footer">
+                    <h5>Sales</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="grid-wrap">
+                  <div class="grid-head">
+                    <i class="fas fa-fw fa-plus"></i>
+                  </div>
+                  <div class="grid-footer">
+                    <h5>Sales</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('./partials/footer')%>
+      </div>
+    </div>
+    <%- include('./partials/footerLinks')%>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header bg-light">New Product</div>
+                  <div class="card-body">
+                    <div class="card-body">
+                      <form
+                        method="post"
+                        id="data"
+                        encType="multipart/form-data"
+                      >
+                        <div class="form-group">
+                          <label class="form-label">*Store</label
+                          ><small
+                            id="store_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <div class="search_select_box">
+                            <select
+                              id="store"
+                              class="form-control"
+                              data-live-search="true"
+                            >
+                              <option value="">Select</option>
+                              <%storeList.map((store,i)=>{%>
+                              <option value="<%=store.storeName%>">
+                                <%=store.storeName%>
+                              </option>
+                              <%})%>
+                            </select>
+                          </div>
+                          <a href="/Stores/New">Manage Stores</a>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">*Category</label
+                          ><small
+                            id="category_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <div class="search_select_box">
+                            <select
+                              id="category"
+                              class="form-control"
+                              data-live-search="true"
+                            >
+                              <option value="">Select</option>
+                              <%categoryList.map((cat,i)=>{%>
+                              <option value="<%=cat.title%>">
+                                <%=cat.title%>
+                              </option>
+                              <%})%>
+                            </select>
+                          </div>
+                          <a href="/Categories/New">Manage Categories</a>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">*Item Name</label
+                          ><small
+                            id="itemName_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="itemName"
+                            placeholder="Item Name"
+                          />
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">*Purchase Price</label
+                          ><small
+                            id="purchasePrice_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="purchasePrice"
+                            placeholder="Purchase Price"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">*Sale Price</label
+                          ><small
+                            id="salePrice_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="salePrice"
+                            placeholder="Sale Price"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">*Stock</label
+                          ><small
+                            id="stock_er"
+                            class="text-danger float-right"
+                          ></small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="stock"
+                            placeholder="Stock"
+                          />
+                        </div>
+
+                        <div class="row">
+                          <div class="col-4">
+                            <small class="form-text text-muted"
+                              >* Required fields</small
+                            >
+                          </div>
+                          <div class="col-8">
+                            <div class="float-right">
+                              <button
+                                type="submit"
+                                class="btn btn-primary addCategory"
+                              >
+                                Save
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+    <script>
+      $(".search_select_box select").selectpicker();
+    </script>
+    <script>
+      $("form#data").submit(function (e) {
+        e.preventDefault();
+        var loadingText = 'Add Category <i class="fa fa-spinner fa-spin"></i>';
+        var formData = {};
+        formData.store = $("#store").val();
+        formData.category = $("#category").val();
+        formData.itemName = $("#itemName").val();
+        formData.purchasePrice = $("#purchasePrice").val();
+        formData.salePrice = $("#salePrice").val();
+        formData.stock = $("#stock").val();
+
+        $.ajax({
+          url: window.location.pathname,
+          type: "POST",
+          data: formData,
+          success: function (data) {
+            if (data.status) {
+              toastr.success(data.succMsg);
+              // document.forms["data"].reset();
+              $("#itemName").val("");
+              $("#purchasePrice").val("");
+              $("#salePrice").val("");
+              $("#stock").val("");
+              $("#itemName").focus();
+            } else {
+              $("#store_er").text(data.parseErrors.store || "");
+              $("#itemName_er").text(data.parseErrors.itemName || "");
+              $("#category_er").text(data.parseErrors.category || "");
+              $("#purchasePrice_er").text(data.parseErrors.purchasePrice || "");
+              $("#salePrice_er").text(data.parseErrors.salePrice || "");
+              $("#stock_er").text(data.parseErrors.stock || "");
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

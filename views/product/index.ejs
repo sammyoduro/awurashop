@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  one
+                  <div class="float-right">
+                    <a href="/Products/New" class="btn btn-primary">New Item</a>
+                    <button
+                      type="button"
+                      class="btn alert-secondary"
+                      id="more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      ...
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="/Categories"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="pie-chart"
+                        ></i>
+                        Manage Categories
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="pie-chart"
+                        ></i>
+                        Count Inventory
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="pie-chart"
+                        ></i>
+                        Excel Export
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header bg-light">
+                    List of Items
+                    <span class="badge bg-primary text-white"
+                      ><%=products.length%></span
+                    >
+                  </div>
+                  <div class="card-body">
+                    <table class="table" id="itemTable">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Branch</th>
+                          <th>Cost Price</th>
+                          <th>Selling Price</th>
+                          <th>Quantity</th>
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%products.map(product=>{%>
+                        <tr>
+                          <td>
+                            <%=product.itemName%> <br />
+                            <small class="text-muted"
+                              ><strong>category: </strong>
+                              <%=product.category%></small
+                            >
+                          </td>
+                          <td><%=product.branch%></td>
+                          <td><%=product.purchasePrice%></td>
+                          <td><%=product.salePrice%></td>
+                          <td><%=product.stock%></td>
+                          <td>
+                            [ <span><a href="#">edit</a></span> ] [
+                            <span class="text-danger"
+                              ><a href="#">delete</a></span
+                            >
+                            ]
+                          </td>
+                        </tr>
+                        <%})%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+    <script>
+      $(document).ready(function () {
+        $("#itemTable").DataTable();
+      });
+    </script>
+  </body>
+</html>

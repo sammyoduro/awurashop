@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">Blank Page</h1>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <table
+                      class="table table-bordered table-striped table-responsive"
+                      id="dataTable"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Receipt #</th>
+                          <td>Customer</td>
+                          <td>Order Amount</td>
+                          <td>Discount</td>
+                          <td>Prev. Balance</td>
+                          <td>Bill Paid</td>
+                          <td>Balance</td>
+                          <td>Issuer</td>
+                          <td>Actions</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%sales.map((sale)=>{%>
+                        <tr>
+                          <td>
+                            <%=new Date(sale.createdAt).toDateString()%>
+                            <br />
+                            <%=new Date(sale.createdAt).toLocaleTimeString()%>
+                          </td>
+                          <td><%=sale.recieptNumber%></td>
+                          <td>
+                            <%=sale.customer.name%>
+                            <br /><small class="text-success"
+                              ><%=sale.customer.phone%></small
+                            >
+                          </td>
+                          <td><%=sale.orderPrice%></td>
+                          <td><%=sale.discount%></td>
+                          <td></td>
+                          <td><%=sale.customerPayment%></td>
+                          <td><%=sale.customerBalance%></td>
+                          <td><%=sale.issuer%></td>
+                          <td>
+                            <a href="/History/view-invoice/<%=sale.id%>"
+                              >View</a
+                            >
+                            |
+                            <a href="#"> <i class="fas fa-print"></i> Print</a>
+                          </td>
+                        </tr>
+                        <%})%>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+    <script>
+      $("#dataTable").dataTable();
+    </script>
+  </body>
+</html>
