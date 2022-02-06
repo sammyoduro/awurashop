@@ -26,20 +26,19 @@
                             id="store_er"
                             class="text-danger float-right"
                           ></small>
-                          <div class="search_select_box">
-                            <select
-                              id="store"
-                              class="form-control"
-                              data-live-search="true"
-                            >
-                              <option value="">Select</option>
-                              <%storeList.map((store,i)=>{%>
-                              <option value="<%=store.storeName%>">
-                                <%=store.storeName%>
-                              </option>
-                              <%})%>
-                            </select>
-                          </div>
+
+                          <select
+                            id="storeList"
+                            class="form-control selectpicker"
+                            data-live-search="true"
+                          >
+                            <option value="">Select</option>
+                            <%storeList.map((store,i)=>{%>
+                            <option value="<%=store.storeName%>">
+                              <%=store.storeName%>
+                            </option>
+                            <%})%>
+                          </select>
                           <a href="/Stores/New">Manage Stores</a>
                         </div>
                         <div class="form-group">
@@ -48,20 +47,18 @@
                             id="category_er"
                             class="text-danger float-right"
                           ></small>
-                          <div class="search_select_box">
-                            <select
-                              id="category"
-                              class="form-control"
-                              data-live-search="true"
-                            >
-                              <option value="">Select</option>
-                              <%categoryList.map((cat,i)=>{%>
-                              <option value="<%=cat.title%>">
-                                <%=cat.title%>
-                              </option>
-                              <%})%>
-                            </select>
-                          </div>
+                          <select
+                            id="categoryList"
+                            class="form-control selectpicker"
+                            data-live-search="true"
+                          >
+                            <option value="">Select</option>
+                            <%categoryList.map((cat,i)=>{%>
+                            <option value="<%=cat.title%>">
+                              <%=cat.title%>
+                            </option>
+                            <%})%>
+                          </select>
                           <a href="/Categories/New">Manage Categories</a>
                         </div>
                         <div class="form-group">
@@ -149,20 +146,28 @@
     </div>
     <%- include('../partials/footerLinks')%>
     <script>
-      $(".search_select_box select").selectpicker();
+      var storeList = "";
+      var categoryList = "";
+      $("#storeList").change(function () {
+        storeList = $(this).val();
+      });
+      $("#categoryList").change(function () {
+        categoryList = $(this).val();
+      });
     </script>
     <script>
       $("form#data").submit(function (e) {
         e.preventDefault();
-        var loadingText = 'Add Category <i class="fa fa-spinner fa-spin"></i>';
+        var loadingText = 'Saving <i class="fa fa-spinner fa-spin"></i>';
         var formData = {};
-        formData.store = $("#store").val();
-        formData.category = $("#category").val();
+        formData.store = storeList;
+        formData.category = categoryList;
         formData.itemName = $("#itemName").val();
         formData.purchasePrice = $("#purchasePrice").val();
         formData.salePrice = $("#salePrice").val();
         formData.stock = $("#stock").val();
-
+        var e = document.getElementById("store");
+        var strUser = e.value;
         $.ajax({
           url: window.location.pathname,
           type: "POST",
