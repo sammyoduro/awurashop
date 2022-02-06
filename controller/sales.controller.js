@@ -45,20 +45,23 @@ module.exports = {
       _id: -1,
     });
 
-    var customer = await customersModel.findOne({ id });
+    var customer = await customersModel.findOne({ _id: id });
+
     customer = {
       id,
       name: customer.customerName,
       phone: customer.phone,
-      date:
-        new Date(selectedCustomer.createdAt).toLocaleDateString() +
-        " @ " +
-        new Date(selectedCustomer.createdAt).toLocaleTimeString(),
-      payment:
-        selectedCustomer.paymentMethod +
-        ": " +
-        selectedCustomer.customerPayment,
-      itemPurchased: selectedCustomer.cart.totalQty,
+      date: selectedCustomer
+        ? new Date(selectedCustomer.createdAt).toLocaleDateString() +
+          " @ " +
+          new Date(selectedCustomer.createdAt).toLocaleTimeString()
+        : "",
+      payment: selectedCustomer
+        ? selectedCustomer.paymentMethod +
+          ": " +
+          selectedCustomer.customerPayment
+        : "",
+      itemPurchased: selectedCustomer ? selectedCustomer.cart.totalQty : "",
       balance: selectedCustomer ? selectedCustomer.customerBalance : 0.0,
     };
     req.session.customer = customer;
