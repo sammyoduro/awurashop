@@ -1,112 +1,130 @@
 <nav id="sidebar" class="sidebar">
-  <div class="sidebar-content js-simplebar">
-    <a class="sidebar-brand" href="/Dashboard">
-      <span class="align-middle">SHOP POS</span>
-    </a>
+  <div class="sidebar-content js-simplebar" data-simplebar="init">
+    <div class="simplebar-wrapper" style="margin: 0px">
+      <div class="simplebar-height-auto-observer-wrapper">
+        <div class="simplebar-height-auto-observer"></div>
+      </div>
+      <div class="simplebar-mask">
+        <div class="simplebar-offset" style="right: 0px; bottom: 0px">
+          <div
+            class="simplebar-content-wrapper"
+            style="height: 100%; overflow: hidden scroll"
+          >
+            <div class="simplebar-content" style="padding: 0px">
+              <a class="sidebar-brand text-center" href="/Dashboard">
+                <span class="align-middle">SHOP POS</span>
+              </a>
 
-    <ul class="sidebar-nav">
-      <li class="sidebar-item active">
-        <a class="sidebar-link" href="/Dashboard">
-          <i class="align-middle" data-feather="sliders"></i>
-          <span class="align-middle">Dashboard</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="/Sales">
-          <i class="align-middle" data-feather="shopping-cart"></i>
-          <span class="align-middle">Sales</span>
-        </a>
-      </li>
-      <li class="sidebar-item">
-        <a
-          href="#category"
-          data-toggle="collapse"
-          class="sidebar-link collapsed"
-        >
-          <i class="align-middle" data-feather="briefcase"></i>
-          <span class="align-middle">Category</span>
-        </a>
-        <ul
-          id="category"
-          class="sidebar-dropdown list-unstyled collapse"
-          data-parent="#sidebar"
-        >
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Categories/New">New Category</a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Categories">List</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <a
-          href="#customer"
-          data-toggle="collapse"
-          class="sidebar-link collapsed"
-        >
-          <i class="align-middle" data-feather="users"></i>
-          <span class="align-middle">Customers</span>
-        </a>
-        <ul
-          id="customer"
-          class="sidebar-dropdown list-unstyled collapse"
-          data-parent="#sidebar"
-        >
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Customers/New">Add Customer</a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Customers">List</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <a href="#store" data-toggle="collapse" class="sidebar-link collapsed">
-          <i class="align-middle" data-feather="home"></i>
-          <span class="align-middle">Store</span>
-        </a>
-        <ul
-          id="store"
-          class="sidebar-dropdown list-unstyled collapse"
-          data-parent="#sidebar"
-        >
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Stores/New">Create Store</a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Stores">List</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <a
-          href="#product"
-          data-toggle="collapse"
-          class="sidebar-link collapsed"
-        >
-          <i class="align-middle" data-feather="tag"></i>
-          <span class="align-middle">Product</span>
-        </a>
-        <ul
-          id="product"
-          class="sidebar-dropdown list-unstyled collapse"
-          data-parent="#sidebar"
-        >
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Products/New">New Product</a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="/Products">List</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <a class="sidebar-link" href="/History">
-          <i class="fas fa-fw fa-history"></i>
-          <span class="align-middle">Histroy</span>
-        </a>
-      </li>
-    </ul>
+              <div class="text-center">
+                <img
+                  class="rounded-circle rounded mr-2 mb-2"
+                  src="../../img/avatars/customer.png"
+                  alt="Placeholder"
+                  width="50"
+                  height="50"
+                />
+                <br />
+                <div class="text-success">
+                  <i class="online"></i>
+                  <%=user.firstName%>
+                </div>
+              </div>
+
+              <ul class="sidebar-nav">
+                <%if(user != undefined){%>
+                <%if(user.permissions=='strong'||user.permissions=='medium'){%>
+                <li class="sidebar-item <%=page == 'dashboard' && 'active'%>">
+                  <a class="sidebar-link" href="/Dashboard">
+                    <i class="align-middle" data-feather="sliders"></i>
+                    <span class="align-middle">Dashboard</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'product' && 'active'%>">
+                  <a class="sidebar-link" href="/Product">
+                    <i class="align-middle" data-feather="tag"></i>
+                    <span class="align-middle">Products</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'customer' && 'active'%>">
+                  <a class="sidebar-link" href="/Customers">
+                    <i class="align-middle" data-feather="list"></i>
+                    <span class="align-middle">Customers</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'users' && 'active'%>">
+                  <a class="sidebar-link" href="/Users">
+                    <i class="align-middle" data-feather="users"></i>
+                    <span class="align-middle">Users</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'stores' && 'active'%>">
+                  <a class="sidebar-link" href="/Stores">
+                    <i class="align-middle" data-feather="home"></i>
+                    <span class="align-middle">Stores</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'history' && 'active'%>">
+                  <a class="sidebar-link" href="/History">
+                    <i class="fas fa-fw fa-history"></i>
+                    <span class="align-middle">Sales History</span>
+                  </a>
+                </li>
+                <%}else{%>
+                <li class="sidebar-item <%=page == 'sales' && 'active'%>">
+                  <a class="sidebar-link" href="/Sales">
+                    <i class="align-middle" data-feather="shopping-cart"></i>
+                    <span class="align-middle">Sales</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'customer' && 'active'%>">
+                  <a class="sidebar-link" href="/Customers">
+                    <i class="align-middle" data-feather="list"></i>
+                    <span class="align-middle">Customers</span>
+                  </a>
+                </li>
+                <li class="sidebar-item <%=page == 'product' && 'active'%>">
+                  <a class="sidebar-link" href="/Product">
+                    <i class="align-middle" data-feather="tag"></i>
+                    <span class="align-middle">Products</span>
+                  </a>
+                </li>
+                <%}}%>
+              </ul>
+              <div class="sidebar-cta">
+                <div class="sidebar-cta-content">
+                  <strong class="d-inline-block mb-2">Shop POS</strong>
+                  <div class="mb-3 text-sm">Sop management application</div>
+                  <a
+                    href="javascript:void(0)"
+                    class="btn btn-outline-primary btn-block"
+                    >Version 1.0.0</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="simplebar-placeholder"
+        style="width: auto; height: 888px"
+      ></div>
+    </div>
+    <div
+      class="simplebar-track simplebar-horizontal"
+      style="visibility: hidden"
+    >
+      <div class="simplebar-scrollbar" style="width: 0px; display: none"></div>
+    </div>
+    <div class="simplebar-track simplebar-vertical" style="visibility: visible">
+      <div
+        class="simplebar-scrollbar"
+        style="
+          height: 111px;
+          transform: translate3d(0px, 0px, 0px);
+          display: block;
+        "
+      ></div>
+    </div>
   </div>
 </nav>

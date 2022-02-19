@@ -5,13 +5,19 @@ module.exports = {
   getPage: async (req, res) => {
     var storeList = await storesModel.find().sort({ _id: -1 });
     res.render("stores/index", {
+      page: "stores",
+      tab: "stores",
       breadcrumb:
         "<li class='breadcrumb-item'><a href='/Dashboard'>Dashboards</a></li><li class='breadcrumb-item active' aria-current='page'>Stores</li>",
       storeList,
+      user: req.user,
     });
   },
   createStore: (req, res) => {
     res.render("stores/new", {
+      page: "stores",
+      tab: "stores",
+      user: req.user,
       breadcrumb:
         "<li class='breadcrumb-item'><a href='/Dashboard'>Dashboards</a></li><li class='breadcrumb-item'><a href='/Stores'>Stores</a></li><li class='breadcrumb-item active' aria-current='page'>New Store</li>",
     });

@@ -15,12 +15,12 @@ module.exports = function Cart(oldCart) {
         unitPrice: 0,
       };
     }
-    storedItem.unitPrice = storedItem.item.salePrice;
+    storedItem.unitPrice = storedItem.item.price;
     storedItem.qty++;
-    storedItem.price = storedItem.item.salePrice * storedItem.qty;
+    storedItem.price = storedItem.item.price * storedItem.qty;
     storedItem.price = storedItem.price.toFixed(2);
     this.totalQty++;
-    this.totalPrice = +this.totalPrice + +storedItem.item.salePrice;
+    this.totalPrice = +this.totalPrice + +storedItem.item.price;
     this.totalPrice = this.totalPrice.toFixed(2);
   };
   // this.IncreaseBydetailInput = function (item, id, numItem) {

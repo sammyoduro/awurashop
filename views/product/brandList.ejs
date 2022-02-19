@@ -24,10 +24,54 @@
                     class="text-primary"
                     id="label"
                   >
-                    Stores</strong
+                    Brands</strong
                   >
                   <div class="float-right">
-                    <a href="/Stores/New" class="btn btn-danger">New Store</a>
+                    <a href="/Product/Brand/New" class="btn btn-success"
+                      >New Brand</a
+                    >
+                    <button
+                      type="button"
+                      class="btn alert-secondary"
+                      id="more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="align-middle" data-feather="more-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a
+                        class="dropdown-item <%=tab == 'category' && 'active'%>"
+                        href="/Product/Category"
+                        ><i class="align-middle mr-1" data-feather="list"></i>
+                        Manage Categories
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'brand' && 'active'%>"
+                        href="/Product/Brand"
+                        ><i class="align-middle mr-1" data-feather="rss"></i>
+                        Brand
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'measurement' && 'active'%>"
+                        href="/Product/Measurement"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="thermometer"
+                        ></i>
+                        Unit of Measurement
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'product' && 'active'%>"
+                        href="/Product"
+                        ><i class="align-middle mr-1" data-feather="tag"></i>
+                        Products
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -38,11 +82,12 @@
           <div class="container-fluid p-0">
             <div class="row">
               <div class="col-lg-12">
+                <%-messages('message',locals) %>
                 <div class="card">
                   <div class="card-header bg-light">
-                    Store List
+                    <strong>Brand List</strong>
                     <span class="badge bg-primary text-white"
-                      ><%=storeList.length%></span
+                      ><%=brandList.length%></span
                     >
                   </div>
                   <div class="card-body">
@@ -52,20 +97,14 @@
                     >
                       <thead>
                         <tr>
-                          <th>Store Id</th>
-                          <th>Store Name</th>
-                          <th>Store Phone</th>
-                          <th>Store Address</th>
+                          <th>Name</th>
                           <th class="text-right">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <%storeList.map(stores=>{%>
+                        <%brandList.map(brand=>{%>
                         <tr>
-                          <td><%=stores.storeCode%></td>
-                          <td><%=stores.storeName%></td>
-                          <td><%=stores.storePhone%></td>
-                          <td><%=stores.storeAddress%></td>
+                          <td><%=brand.title%></td>
                           <td class="text-right">
                             [<a href="">edit</a>] [<a
                               href=""

@@ -198,6 +198,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 article,
 aside,
 figcaption,
@@ -16528,7 +16529,7 @@ a {
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: Font Awesome\5 Free;
+  font-family: Font awesome\5 Free;
   font-style: normal;
   font-weight: 400;
   font-display: auto;
@@ -16546,7 +16547,7 @@ a {
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: Font Awesome\5 Free;
+  font-family: Font awesome\5 Free;
   font-style: normal;
   font-weight: 900;
   font-display: auto;
@@ -16560,7 +16561,7 @@ a {
 .fa,
 .far,
 .fas {
-  font-family: Font Awesome\5 Free;
+  font-family: Font awesome\5 Free;
 }
 .fa,
 .fas {

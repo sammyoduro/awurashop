@@ -8,13 +8,44 @@
 
       <div class="main">
         <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card bg-warning">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  <span
+                    ><i
+                      class="fa fa-home text-primary"
+                      style="font-size: 35px; float: left"
+                    ></i
+                  ></span>
+                  <strong
+                    style="font-size: 20px; margin-left: 10px"
+                    class="text-primary"
+                    id="label"
+                  >
+                    Customers</strong
+                  >
+                  <div class="float-right">
+                    <a href="/Customers/New" class="btn btn-danger"
+                      >New Customer</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <main class="content refreshHero">
           <div class="container-fluid p-0">
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-header bg-light">
-                    Customers <%=customers.length%>
+                    Customers
+                    <i class="badge bg-primary text-white"
+                      ><%=customers.length%></i
+                    >
                   </div>
                   <div class="card-body">
                     <div class="card-body">

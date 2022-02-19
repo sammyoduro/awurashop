@@ -7,6 +7,77 @@
 
       <div class="main">
         <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card bg-warning">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  <span
+                    ><i
+                      class="fa fa-home text-primary"
+                      style="font-size: 35px; float: left"
+                    ></i
+                  ></span>
+                  <strong
+                    style="font-size: 20px; margin-left: 10px"
+                    class="text-primary"
+                    id="label"
+                  >
+                    New Product</strong
+                  >
+                  <div class="float-right">
+                    <a href="/Product" class="btn btn-dark">
+                      <i class="align-middle" data-feather="rotate-ccw"></i>
+                      Back</a
+                    >
+                    <button
+                      type="button"
+                      class="btn alert-secondary"
+                      id="more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="align-middle" data-feather="more-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a
+                        class="dropdown-item <%=tab == 'category' && 'active'%>"
+                        href="/Product/Category"
+                        ><i class="align-middle mr-1" data-feather="list"></i>
+                        Manage Categories
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'brand' && 'active'%>"
+                        href="/Product/Brand"
+                        ><i class="align-middle mr-1" data-feather="rss"></i>
+                        Brand
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'measurement' && 'active'%>"
+                        href="/Product/Measurement"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="thermometer"
+                        ></i>
+                        Unit of Measurement
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'product' && 'active'%>"
+                        href="/Product"
+                        ><i class="align-middle mr-1" data-feather="tag"></i>
+                        Products
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <main class="content refreshHero">
           <div class="container-fluid p-0">
             <div class="row">
@@ -15,104 +86,126 @@
                   <div class="card-header bg-light">New Product</div>
                   <div class="card-body">
                     <div class="card-body">
-                      <form
-                        method="post"
-                        id="data"
-                        encType="multipart/form-data"
-                      >
-                        <div class="form-group">
-                          <label class="form-label">*Store</label
-                          ><small
-                            id="store_er"
-                            class="text-danger float-right"
-                          ></small>
-
-                          <select
-                            id="storeList"
-                            class="form-control selectpicker"
-                            data-live-search="true"
+                      <form method="post" id="data" action="/Product/New">
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Product Code*</strong></label
                           >
-                            <option value="">Select</option>
-                            <%storeList.map((store,i)=>{%>
-                            <option value="<%=store.storeName%>">
-                              <%=store.storeName%>
-                            </option>
-                            <%})%>
-                          </select>
-                          <a href="/Stores/New">Manage Stores</a>
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
+                            <input
+                              type="text"
+                              name="productCode"
+                              class="form-control"
+                              placeholder="Product Code"
+                              value="<%=productCode%>"
+                              readonly
+                            />
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <label class="form-label">*Category</label
-                          ><small
-                            id="category_er"
-                            class="text-danger float-right"
-                          ></small>
-                          <select
-                            id="categoryList"
-                            class="form-control selectpicker"
-                            data-live-search="true"
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Product Name*</strong></label
                           >
-                            <option value="">Select</option>
-                            <%categoryList.map((cat,i)=>{%>
-                            <option value="<%=cat.title%>">
-                              <%=cat.title%>
-                            </option>
-                            <%})%>
-                          </select>
-                          <a href="/Categories/New">Manage Categories</a>
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="productName"
+                              name="productName"
+                              placeholder="Product Name"
+                              readonly
+                            />
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <label class="form-label">*Item Name</label
-                          ><small
-                            id="itemName_er"
-                            class="text-danger float-right"
-                          ></small>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="itemName"
-                            placeholder="Item Name"
-                          />
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Category*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
+                            <select
+                              id="categoryList"
+                              name="categoryList"
+                              class="form-control selectpicker"
+                              data-live-search="true"
+                            >
+                              <option value="">Select option</option>
+                              <%categoryList.map((cat,i)=>{%>
+                              <option value="<%=cat.title%>">
+                                <%=cat.title%>
+                              </option>
+                              <%})%>
+                            </select>
+                            <a href="/Product/Category/New"
+                              >Manage Categories</a
+                            >
+                          </div>
                         </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Brand Name*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
 
-                        <div class="form-group">
-                          <label class="form-label">*Purchase Price</label
-                          ><small
-                            id="purchasePrice_er"
-                            class="text-danger float-right"
-                          ></small>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="purchasePrice"
-                            placeholder="Purchase Price"
-                          />
+                            <select
+                              id="brandList"
+                              name="brandList"
+                              class="form-control selectpicker"
+                              data-live-search="true"
+                            >
+                              <option value="">Select option</option>
+                              <%brandList.map(brand=>{%>
+                              <option value="<%=brand.title%>">
+                                <%=brand.title%>
+                              </option>
+                              <%})%>
+                            </select>
+                            <a href="/Product/Brand/New">Manage Brands</a>
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <label class="form-label">*Sale Price</label
-                          ><small
-                            id="salePrice_er"
-                            class="text-danger float-right"
-                          ></small>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="salePrice"
-                            placeholder="Sale Price"
-                          />
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>U/M*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
+
+                            <select
+                              id="measurementList"
+                              name="measurementList"
+                              class="form-control selectpicker"
+                              data-live-search="true"
+                            >
+                              <option value="">Select option</option>
+                              <%measurementList.map(measurement=>{%>
+                              <option value="<%=measurement.title%>">
+                                <%=measurement.title%>
+                              </option>
+                              <%})%>
+                            </select>
+                            <a href="/Product/Measurement/New"
+                              >Manage Measurements</a
+                            >
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <label class="form-label">*Stock</label
-                          ><small
-                            id="stock_er"
-                            class="text-danger float-right"
-                          ></small>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="stock"
-                            placeholder="Stock"
-                          />
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Product Details</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small
+                              id="productName_er"
+                              class="text-danger float-right"
+                            ></small>
+                            <textarea
+                              class="form-control"
+                              name="productDetails"
+                              rows="2"
+                            ></textarea>
+                          </div>
                         </div>
 
                         <div class="row">
@@ -146,16 +239,29 @@
     </div>
     <%- include('../partials/footerLinks')%>
     <script>
-      var storeList = "";
-      var categoryList = "";
-      $("#storeList").change(function () {
-        storeList = $(this).val();
-      });
+      var brandName = "";
+      var categoryName = "";
+      var measurementName = "";
+      var productNameBind = "";
+      var productName = $("#productName");
+
       $("#categoryList").change(function () {
-        categoryList = $(this).val();
+        categoryName = $(this).val();
+        productNameBind += `${categoryName}`;
+        productName.val(productNameBind);
+      });
+      $("#brandList").change(function () {
+        brandName = $(this).val();
+        productNameBind += `-${brandName}`;
+        productName.val(productNameBind);
+      });
+      $("#measurementList").change(function () {
+        measurementName = $(this).val();
+        productNameBind += `-${measurementName}`;
+        productName.val(productNameBind);
       });
     </script>
-    <script>
+    <!-- <script>
       $("form#data").submit(function (e) {
         e.preventDefault();
         var loadingText = 'Saving <i class="fa fa-spinner fa-spin"></i>';
@@ -192,6 +298,6 @@
           },
         });
       });
-    </script>
+    </script> -->
   </body>
 </html>

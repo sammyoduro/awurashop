@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <%-messages('message',locals) %>
+                <div class="card">
+                  <div class="card-header bg-light">Profile</div>
+                  <div class="card-body text-center">
+                    <img
+                      class="img-thumbnail rounded mr-2 mb-2"
+                      src="../img/avatars/avatar.jpg"
+                      alt="Placeholder"
+                      width="140"
+                      height="140"
+                    />
+                    <br />
+                    ( Super Admin )
+                  </div>
+                  <hr />
+                  <div class="card-footer">
+                    <strong>Email: </strong> samueloduroonline@gmail.com <br />
+                    <strong>Last Login: </strong> date <br />
+                    <strong> Last Logout:</strong> date
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+  </body>
+</html>

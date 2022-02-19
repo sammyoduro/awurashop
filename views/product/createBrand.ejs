@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card bg-warning">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  <span
+                    ><i
+                      class="fa fa-home text-primary"
+                      style="font-size: 35px; float: left"
+                    ></i
+                  ></span>
+                  <strong
+                    style="font-size: 20px; margin-left: 10px"
+                    class="text-primary"
+                    id="label"
+                  >
+                    New Brand</strong
+                  >
+                  <div class="float-right">
+                    <a href="/Product/Brand" class="btn btn-dark">
+                      <i class="align-middle" data-feather="rotate-ccw"></i>
+                      Back</a
+                    >
+                    <button
+                      type="button"
+                      class="btn alert-secondary"
+                      id="more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="align-middle" data-feather="more-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a
+                        class="dropdown-item <%=tab == 'category' && 'active'%>"
+                        href="/Product/Category"
+                        ><i class="align-middle mr-1" data-feather="list"></i>
+                        Manage Categories
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'brand' && 'active'%>"
+                        href="/Product/Brand"
+                        ><i class="align-middle mr-1" data-feather="rss"></i>
+                        Brand
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'measurement' && 'active'%>"
+                        href="/Product/Measurement"
+                        ><i
+                          class="align-middle mr-1"
+                          data-feather="thermometer"
+                        ></i>
+                        Unit of Measurement
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item <%=tab == 'product' && 'active'%>"
+                        href="/Product"
+                        ><i class="align-middle mr-1" data-feather="tag"></i>
+                        Products
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header bg-light">
+                    <strong>New Brand</strong>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-body">
+                      <form method="post" accept="/Product/Brand" id="data">
+                        <div class="form-group">
+                          <label class="form-label">*Title</label
+                          ><small class="text-danger float-right">
+                            <%=errors && errors.title%>
+                          </small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="title"
+                            placeholder="Title"
+                          />
+                        </div>
+                        <div class="row">
+                          <div class="col-4">
+                            <small class="form-text text-muted"
+                              >* Required fields</small
+                            >
+                          </div>
+                          <div class="col-8">
+                            <div class="float-right">
+                              <button
+                                type="submit"
+                                class="btn btn-primary addCategory"
+                              >
+                                Save Brand
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+  </body>
+</html>

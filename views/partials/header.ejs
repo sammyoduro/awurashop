@@ -2,11 +2,8 @@
   <a class="sidebar-toggle d-flex">
     <i class="hamburger align-self-center"></i>
   </a>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-      <%-breadcrumb%>
-    </ol>
-  </nav>
+  <%if(user.permissions=='low'){%>CASHIER<%}else
+  if(user.permissions=='medium'){%>WAREHOUSE MANAGER<%}else{%>ADMINISTRATOR<%}%>
   <div class="navbar-collapse collapse">
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
@@ -109,7 +106,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-5.jpg"
+                    src="img/avatars/customer.png"
                     class="avatar img-fluid rounded-circle"
                     alt="Vanessa Tucker"
                   />
@@ -127,7 +124,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-2.jpg"
+                    src="img/avatars/customer.png"
                     class="avatar img-fluid rounded-circle"
                     alt="William Harris"
                   />
@@ -145,7 +142,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-4.jpg"
+                    src="img/avatars/customer.png"
                     class="avatar img-fluid rounded-circle"
                     alt="Christina Mason"
                   />
@@ -163,7 +160,7 @@
               <div class="row no-gutters align-items-center">
                 <div class="col-2">
                   <img
-                    src="img/avatars/avatar-3.jpg"
+                    src="img/avatars/customer.png"
                     class="avatar img-fluid rounded-circle"
                     alt="Sharon Lessman"
                   />
@@ -198,31 +195,22 @@
           data-toggle="dropdown"
         >
           <img
-            src="img/avatars/avatar.jpg"
+            src="img/avatars/customer.png"
             class="avatar img-fluid rounded mr-1"
             alt="Charles Hall"
           />
-          <span class="text-dark">Charles Hall</span>
+          <span class="text-dark"><%=user.firstName%> <%=user.lastName%></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="pages-profile.html"
+          <a class="dropdown-item" href="/User/Profile"
             ><i class="align-middle mr-1" data-feather="user"></i> Profile</a
           >
-          <a class="dropdown-item" href="#"
-            ><i class="align-middle mr-1" data-feather="pie-chart"></i>
-            Analytics</a
-          >
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="pages-settings.html"
+          <a class="dropdown-item" href="/User/Settings"
             ><i class="align-middle mr-1" data-feather="settings"></i> Settings
             & Privacy</a
           >
-          <a class="dropdown-item" href="#"
-            ><i class="align-middle mr-1" data-feather="help-circle"></i> Help
-            Center</a
-          >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Log out</a>
+          <a class="dropdown-item" href="/User/Logout">Log out</a>
         </div>
       </li>
     </ul>

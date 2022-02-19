@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var customersSchema = new Schema({
   customerName: { type: String },
   phone: { type: String },
+  discount: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 

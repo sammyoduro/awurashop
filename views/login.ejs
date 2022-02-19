@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>login</title>
-  </head>
-  <body></body>
+  <%- include('./partials/head')%>
+  <style>
+    .form-control {
+      padding: 1.25rem 0.7rem;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 offset-lg-4" style="padding-top: 30px">
+          <div class="col-lg-12" style="margin: 50px 0px; text-align: center">
+            <h1 style="font-weight: 400px">STAFF AREA</h1>
+          </div>
+          <div class="card">
+            <div class="card-header bg-success text-white">Staff Login</div>
+            <div class="card-body">
+              <%-messages('message',locals) %>
+              <form action="/" method="post" id="login">
+                <div class="input-group mb-2 mr-sm-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-user"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    placeholder="Username"
+                  />
+                </div>
+                <div class="input-group mb-2 mr-sm-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-lock"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('./partials/footerLinks')%>
+    <script>
+      $("form#login").submit((e) => {
+        // e.preventDefault();
+        var loadingText =
+          'Signing up <div class="spinner-grow spinner-grow-sm text-primary mr-2" role="status"><span class="sr-only">Loading...</span></div>';
+        $(".submit").html(loadingText);
+        // const formData = {};
+        // formData.username = $("#username").val();
+        // formData.password = $("#password").val();
+        // console.log(document.location.pathname);
+        // $.ajax({
+        //   url: `${document.location.pathname}`,
+        //   type: "POST",
+        //   data: formData,
+        //   success: function (data) {
+        //     console.log(data);
+        //   },
+        // });
+      });
+    </script>
+  </body>
 </html>

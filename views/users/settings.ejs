@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <%-messages('message',locals) %>
+                <div class="card">
+                  <div class="card-header bg-light">Profile Settings</div>
+                  <div class="card-body">
+                    <form method="post" id="data" action="/Product/New">
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>First Name*</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <input
+                            type="text"
+                            name="firstName"
+                            class="form-control"
+                            placeholder="First Name"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>Last Name*</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="lastName"
+                            placeholder="Last Name"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>Email Address*</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Email Address"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>Password</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <input
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            placeholder="Password"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>Preview</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <img
+                            class="img-thumbnail rounded mr-2 mb-2"
+                            src="../img/avatars/avatar.jpg"
+                            alt="Placeholder"
+                            width="140"
+                            height="140"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-form-label col-sm-3"
+                          ><strong>Image</strong></label
+                        >
+                        <div class="col-sm-9">
+                          <small class="text-danger float-right"></small>
+                          <input
+                            type="file"
+                            name="image"
+                            placeholder="Email Address"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-4">
+                          <small class="form-text text-muted"
+                            >* Required fields</small
+                          >
+                        </div>
+                        <div class="col-8">
+                          <div class="float-right">
+                            <button
+                              type="submit"
+                              class="btn btn-primary addCategory"
+                            >
+                              Save
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+  </body>
+</html>

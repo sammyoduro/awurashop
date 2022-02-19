@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  one
+                  <div class="float-right">
+                    <a href="/Product/New" class="btn btn-primary"
+                      >Create Product</a
+                    >
+                    <button
+                      type="button"
+                      class="btn alert-secondary"
+                      id="more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      ...
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="/Categories"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-pie-chart align-middle mr-1"
+                        >
+                          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                          <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                        Manage Categories
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-pie-chart align-middle mr-1"
+                        >
+                          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                          <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                        Count Inventory
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-pie-chart align-middle mr-1"
+                        >
+                          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                          <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                        </svg>
+                        Excel Export
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <%-messages('message',locals) %>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group row">
+                          <label class="col-form-label col-md-5"
+                            ><strong>Proposal Code</strong></label
+                          >
+                          <div class="col-md-7">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="PCode"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group row">
+                          <label class="col-form-label col-md-4"
+                            ><strong>For Store</strong></label
+                          >
+                          <div class="col-md-8">
+                            <select name="" id="" class="form-control">
+                              <option value="">Select Option</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group row">
+                          <label class="col-form-label col-md-4"
+                            ><strong>From Store</strong></label
+                          >
+                          <div class="col-md-8">
+                            <select name="" id="" class="form-control">
+                              <option value="">Select Option</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group row">
+                          <label class="col-form-label col-md-5"
+                            ><strong>Proposal Date</strong></label
+                          >
+                          <div class="col-md-7">
+                            <input type="date" class="form-control" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <form method="post" id="data" encType="multipart/form-data">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Proposal Qty</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody class="field_wrapper">
+                          <tr>
+                            <td>
+                              <input
+                                type="text"
+                                name="productName"
+                                class="form-control"
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="text"
+                                name="productCode"
+                                class="form-control"
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="text"
+                                name="quantity"
+                                class="form-control"
+                              />
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="4">
+                              <a
+                                href="javascript:void(0);"
+                                class="btn btn-info add_button"
+                                title="Add field"
+                                ><i class="fas fa-plus"></i> Row</a
+                              >
+                              <button
+                                type="submit"
+                                class="btn btn-success float-right"
+                              >
+                                Save
+                              </button>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+    <script>
+      $(document).ready(function () {
+        var x = 1;
+        var maxField = 10;
+        var addButton = $(".add_button");
+        var wrapper = $(".field_wrapper");
+
+        $(addButton).click(function () {
+          if (x < maxField) {
+            x++;
+            getiterator(x);
+          }
+        });
+
+        var getiterator = (i) => {
+          if (i == undefined) {
+            return false;
+          }
+          var fieldHTML = `<tr>
+                                 <td><input type="text" name="productName" class="form-control" /></td>
+                                 <td><input type="text" name="productCode" class="form-control" /></td>
+                                 <td><input type="text" name="quantity" class="form-control" /></td>
+                                 <td>
+                                   <button class="btn btn-danger remove_button"><i class="fas fa-trash"></i></button>
+                                 </td>
+                               </tr>`;
+          $(wrapper).append(fieldHTML);
+        };
+        getiterator();
+        $(wrapper).on("click", ".remove_button", function (e) {
+          e.preventDefault();
+          $(this).parent().parent("tr").remove();
+          x--;
+        });
+
+        var current_effect = "bounce";
+
+        $("form#data").submit(function (e) {
+          e.preventDefault();
+          var formData = new FormData(this);
+
+          $.ajax({
+            url: window.location.pathname,
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              console.log(data);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

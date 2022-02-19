@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head')%>
+  <body>
+    <div class="wrapper">
+      <%- include('../partials/menu')%>
+
+      <div class="main">
+        <%- include('../partials/header')%>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card bg-warning">
+              <div class="card-body">
+                <div class="col-lg-12">
+                  <span
+                    ><i
+                      class="fa fa-home text-primary"
+                      style="font-size: 35px; float: left"
+                    ></i
+                  ></span>
+                  <strong
+                    style="font-size: 20px; margin-left: 10px"
+                    class="text-primary"
+                    id="label"
+                  >
+                    New User</strong
+                  >
+                  <div class="float-right">
+                    <a href="/Users" class="btn btn-dark">
+                      <i class="align-middle" data-feather="rotate-ccw"></i>
+                      Back</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="content refreshHero">
+          <div class="container-fluid p-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header bg-light">New User</div>
+                  <div class="card-body">
+                    <div class="card-body">
+                      <form method="post" id="data" action="/Users/New">
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>First Name*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"
+                              ><%=errors && errors.firstName%></small
+                            >
+                            <input
+                              type="text"
+                              name="firstName"
+                              class="form-control"
+                              placeholder="First Name"
+                              value="<%=inputs && inputs.firstName%>"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Last Name*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"
+                              ><%=errors && errors.lastName%></small
+                            >
+                            <input
+                              type="text"
+                              name="lastName"
+                              class="form-control"
+                              placeholder="Last Name"
+                              value="<%=inputs && inputs.lastName%>"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Username*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"
+                              ><%=errors && errors.username%></small
+                            >
+                            <input
+                              type="text"
+                              name="username"
+                              class="form-control"
+                              placeholder="Username"
+                              value="<%=inputs && inputs.username%>"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Phone*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"
+                              ><%=errors && errors.phone%></small
+                            >
+                            <input
+                              type="text"
+                              name="phone"
+                              class="form-control"
+                              placeholder="Phone"
+                              value="<%=inputs && inputs.phone%>"
+                            />
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>User Type*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"></small>
+                            <select
+                              name="permissions"
+                              class="form-control"
+                            >
+                              <option value="low" <%=inputs.permissions=='low' && 'selected'%>>Cashier</option>
+                              <option value="medium" <%=inputs.permissions=='medium' && 'selected'%>>Warehouse Manager</option>
+                              <option value="strong" <%=inputs.permissions=='strong' && 'selected'%>>Admin</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-form-label col-sm-3"
+                            ><strong>Assign Store*</strong></label
+                          >
+                          <div class="col-sm-9">
+                            <small class="text-danger float-right"
+                              ><%=errors && errors.store%></small
+                            >
+                            <select
+                              name="store"
+                              class="form-control"
+                            >
+                            <option value="" readonly>Select Option</option>
+                            <%stores.map(store=>{%>
+                              <option value="<%=store.storeName%>" <%=inputs.store && 'selected'%>><%=store.storeName%></option>
+                            <%})%>
+                              
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-4">
+                            <small class="form-text text-muted"
+                              >* Required fields</small
+                            >
+                          </div>
+                          <div class="col-8">
+                            <div class="float-right">
+                              <button
+                                type="submit"
+                                class="btn btn-primary addCategory"
+                              >
+                                Save
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <%- include('../partials/footer')%>
+      </div>
+    </div>
+    <%- include('../partials/footerLinks')%>
+  </body>
+</html>

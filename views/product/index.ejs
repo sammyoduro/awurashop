@@ -10,48 +10,30 @@
         <%- include('../partials/header')%>
         <div class="row">
           <div class="col-lg-12">
-            <div class="card">
+            <div class="card bg-warning">
               <div class="card-body">
                 <div class="col-lg-12">
-                  one
+                  <span
+                    ><i
+                      class="fa fa-home text-primary"
+                      style="font-size: 35px; float: left"
+                    ></i
+                  ></span>
+                  <strong
+                    style="font-size: 20px; margin-left: 10px"
+                    class="text-primary"
+                    id="label"
+                  >
+                    Products</strong
+                  >
+                  <%if(user.permissions!='low'){%>
+
                   <div class="float-right">
-                    <a href="/Products/New" class="btn btn-primary">New Item</a>
-                    <button
-                      type="button"
-                      class="btn alert-secondary"
-                      id="more"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+                    <a href="/Product/New" class="btn btn-success"
+                      >New Product</a
                     >
-                      ...
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href="/Categories"
-                        ><i
-                          class="align-middle mr-1"
-                          data-feather="pie-chart"
-                        ></i>
-                        Manage Categories
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"
-                        ><i
-                          class="align-middle mr-1"
-                          data-feather="pie-chart"
-                        ></i>
-                        Count Inventory
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"
-                        ><i
-                          class="align-middle mr-1"
-                          data-feather="pie-chart"
-                        ></i>
-                        Excel Export
-                      </a>
-                    </div>
                   </div>
+                  <%}%>
                 </div>
               </div>
             </div>
@@ -61,6 +43,7 @@
           <div class="container-fluid p-0">
             <div class="row">
               <div class="col-lg-12">
+                <%-messages('message',locals) %>
                 <div class="card">
                   <div class="card-header bg-light">
                     List of Items
@@ -69,42 +52,145 @@
                     >
                   </div>
                   <div class="card-body">
-                    <table class="table" id="itemTable">
+                    <%if(user.permissions!='low'){%>
+                    <table
+                      class="table table-hover table-responsive table-sm"
+                      id="itemTable"
+                    >
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Branch</th>
-                          <th>Cost Price</th>
-                          <th>Selling Price</th>
-                          <th>Quantity</th>
-                          <th>Edit</th>
+                          <th>Code</th>
+                          <th>Product Name</th>
+                          <th>Category</th>
+                          <th>Brand</th>
+                          <th>M/U</th>
+                          <th style="width: 62.5208px">Pur Price</th>
+                          <th style="width: 65.5208px">Retl Price</th>
+                          <th style="width: 86.8646px">Qty</th>
+                          <th style="width: 117.1667px">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <%products.map(product=>{%>
                         <tr>
+                          <td><%=product.productCode%></td>
+                          <td><%=product.productName%></td>
+                          <td><%=product.category%></td>
+                          <td><%=product.brand%></td>
+                          <td><%=product.measurement%></td>
                           <td>
-                            <%=product.itemName%> <br />
-                            <small class="text-muted"
-                              ><strong>category: </strong>
-                              <%=product.category%></small
-                            >
+                            <input
+                              type="text"
+                              class="form-control text-center"
+                              maxlength="4"
+                              id="purchase<%=product.id%>"
+                              value="<%=product.purchasePrice%>"
+                            />
                           </td>
-                          <td><%=product.branch%></td>
-                          <td><%=product.purchasePrice%></td>
-                          <td><%=product.salePrice%></td>
-                          <td><%=product.stock%></td>
                           <td>
-                            [ <span><a href="#">edit</a></span> ] [
-                            <span class="text-danger"
-                              ><a href="#">delete</a></span
+                            <input
+                              type="text"
+                              class="form-control text-center"
+                              maxlength="4"
+                              id="retail<%=product.id%>"
+                              value="<%=product.retailPrice%>"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="text"
+                              class="quantity form-control text-center"
+                              id="quantity<%=product.id%>"
+                              maxlength="4"
+                              value="<%=product.quantity%>"
+                            />
+                          </td>
+                          <td style="width: 97.1667px">
+                            <button
+                              class="btn btn-sm btn-success saveBtn"
+                              data-id="<%=product.id%>"
                             >
-                            ]
+                              <i class="fas fa-save"></i>
+                            </button>
+                            <button
+                              class="btn btn-sm btn-info editBtn"
+                              data-id="<%=product.id%>"
+                            >
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button
+                              class="btn btn-sm btn-danger deleteBtn"
+                              data-id="<%=product.id%>"
+                            >
+                              <i class="fas fa-trash"></i>
+                            </button>
+                            <!--  -->
+                            <button
+                              type="button"
+                              class="btn btn-sm alert-secondary"
+                              id="more"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i
+                                class="align-middle"
+                                data-feather="more-vertical"
+                              ></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item" href="/Categories">
+                                <%storeStock.map(code=>{%>
+                                <%if(product.productCode == code.productCode){%>
+                                Store <%=code.storeCode%> :
+                                <strong><%=code.quantity%> qty</strong><br />
+                                <%}%> <%})%>
+                              </a>
+
+                              <div class="dropdown-divider"></div>
+                              <a
+                                class="dropdown-item"
+                                href="/Product/store-stock-management/<%=product.id%>"
+                                ><i
+                                  class="align-middle mr-1"
+                                  data-feather="tag"
+                                ></i>
+                                Manage Stores Stock
+                              </a>
+                            </div>
+                            <!--  -->
                           </td>
                         </tr>
                         <%})%>
                       </tbody>
                     </table>
+                    <%}else{%>
+                    <table
+                      class="table table-hover table-responsive"
+                      id="itemTable"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Product Name</th>
+                          <th>Category</th>
+                          <th style="width: 65.5208px">Retl Price</th>
+                          <th style="width: 86.8646px">Qty</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <%products.map(product=>{%>
+                        <tr>
+                          <td><%=product.productCode%></td>
+                          <td><%=product.productName%></td>
+                          <td><%=product.category%></td>
+                          <td><%=Number(product.price).toFixed(2)%></td>
+                          <td><%=product.quantity%></td>
+                        </tr>
+                        <%})%>
+                      </tbody>
+                    </table>
+                    <%}%>
                   </div>
                 </div>
               </div>
@@ -119,6 +205,30 @@
     <script>
       $(document).ready(function () {
         $("#itemTable").DataTable();
+      });
+    </script>
+    <script>
+      $(".saveBtn").on("click", function ($ev) {
+        var id = $(this).data("id");
+        var purchase = $(`#purchase${id}`).val();
+        var retail = $(`#retail${id}`).val();
+        var quantity = $(`#quantity${id}`).val();
+
+        $.ajax({
+          type: "put",
+          data: { purchase, retail, quantity, id },
+          dataType: "json",
+          url: window.location.pathname,
+          success: function (data) {
+            if (data.status) {
+              toastr.success(data.succMsg);
+            } else {
+              Object.keys(data.errors).forEach((index) => {
+                toastr.error(data.errors[index]);
+              });
+            }
+          },
+        });
       });
     </script>
   </body>

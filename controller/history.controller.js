@@ -7,8 +7,8 @@ module.exports = {
 
     res.render("history/index", {
       sales,
-      breadcrumb:
-        "<li class='breadcrumb-item'><a href='/Dashboard'>Dashboards</a></li><li class='breadcrumb-item active' aria-current='page'>History</li>",
+      page: "history",
+      user: req.user,
     });
   },
   viewInvoice: async (req, res) => {
@@ -19,8 +19,8 @@ module.exports = {
     res.render("history/invoice", {
       sales,
       cart,
-      breadcrumb:
-        "<li class='breadcrumb-item'><a href='/Dashboard'>Dashboards</a></li><li class='breadcrumb-item'><a href='/History'>History</a></li><li class='breadcrumb-item active' aria-current='page'>Invoice</li>",
+      page: "history",
+      user: req.user,
     });
   },
 };

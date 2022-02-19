@@ -4,39 +4,49 @@ const discountModel = require("../model/discount.model");
 const Sales = require("../model/sales.model");
 const Product = require("../model/product.model");
 const customersModel = require("../model/customers.model");
-const { json } = require("express");
+const storeProductsModel = require("../model/storeProducts.model");
+
 module.exports = {
   getPage: async (req, res) => {
-    const productSample = await Product.find();
+    const productSample = await storeProductsModel.find({
+      storeName: req.user.storeName,
+    });
     const customers = await customersModel.find();
     // var discount = await getDiscount();
-    var discount = { limit: 200, discountRate: 15 };
     var inv = await Sales.findOne().sort({ _id: -1 });
+
     const cart = new Cart(req.session.cart || 0);
     res.render("sales/index", {
       breadcrumb:
         "<li class='breadcrumb-item'><a href='/Dashboard'>Dashboards</a></li><li class='breadcrumb-item active' aria-current='page'>Sales</li>",
-      page: "newsales",
+      page: "sales",
+      tab: "sales",
       InvoiceNumber: inv
         ? InvoiceNumber.next(inv.recieptNumber)
         : InvoiceNumber.next("000000000000000"),
       cart: cart.generateArray(),
       subCart: cart,
-      productSample: productSample,
+      productSample,
       customers,
+      user: req.user,
       selectedCustomer: req.session.customer || null,
-      // sample: JSON.stringify(productSample),
-      discount,
     });
   },
   addToCart: async (req, res) => {
-    const { id } = req.params;
+    const Param = req.params.id;
+    const id = Param.split("_")[0];
+    const storeCode = Param.split("_")[1];
+
     const cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
-    const product = await Product.findOne({ _id: id });
-    cart.add(product, product.id);
-    req.session.cart = cart;
+    const product = await storeProductsModel.findOne({
+      productId: id,
+      storeCode,
+    });
     console.log(product);
-    res.send({ status: 1, succMsg: `${product.itemName} added!` });
+    cart.add(product, product.productId);
+    req.session.cart = cart;
+
+    res.send({ status: 1, succMsg: `${product.productName} added!` });
   },
   attachCustomer: async (req, res) => {
     const { id } = req.params;
@@ -51,6 +61,7 @@ module.exports = {
       id,
       name: customer.customerName,
       phone: customer.phone,
+      discount: customer.discount,
       date: selectedCustomer
         ? new Date(selectedCustomer.createdAt).toLocaleDateString() +
           " @ " +
@@ -64,6 +75,7 @@ module.exports = {
       itemPurchased: selectedCustomer ? selectedCustomer.cart.totalQty : "",
       balance: selectedCustomer ? selectedCustomer.customerBalance : 0.0,
     };
+
     req.session.customer = customer;
     res.send({ status: 1 });
   },
@@ -76,12 +88,22 @@ module.exports = {
       var done = false;
       var parseCalback = await new Promise((resolve) => {
         Orders.map(async (order) => {
-          var callback = await Product.find({ _id: order.item._id });
-          if (order.item._id == callback[0].id) {
-            var newStock = callback[0].stock - order.qty;
-            await Product.updateMany(
-              { _id: callback[0].id },
-              { $set: { stock: newStock } }
+          var callback = await storeProductsModel.find({
+            productId: order.item.productId,
+            storeCode: order.item.storeCode,
+          });
+
+          if (
+            order.item.productId == callback[0].productId &&
+            order.item.storeCode == callback[0].storeCode
+          ) {
+            var newStock = callback[0].quantity - order.qty;
+            await storeProductsModel.updateMany(
+              {
+                productId: callback[0].productId,
+                storeCode: callback[0].storeCode,
+              },
+              { $set: { quantity: newStock } }
             );
             counter++;
             if (counter == Orders.length) {
@@ -104,9 +126,9 @@ module.exports = {
       } = req.body;
 
       if (parseCalback == true) {
-        var discount = await getDiscount();
+        var discount = req.session.customer;
 
-        discount = !discount ? 0 : discount.discountRate / 100;
+        discount = !discount ? 0 : discount.discount / 100;
 
         var order = new Sales({
           customerId,
@@ -130,7 +152,13 @@ module.exports = {
         await order.save();
         req.session.cart = null;
         req.session.customer = null;
-        res.send({ status: 1, succMsg: "Done", cart: Orders, sales: order });
+        res.send({
+          status: 1,
+          succMsg: "Done",
+          cart: Orders,
+          sales: order,
+          totalQty: cart.totalQty,
+        });
       }
     } catch (error) {
       throw error;
